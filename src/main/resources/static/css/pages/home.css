@@ -1,0 +1,8 @@
+@import "../reset.css";
+
+header {
+    background-color: lime;
+    color: white;
+    font-size: 2rem;
+    padding-left: 1rem;
+}

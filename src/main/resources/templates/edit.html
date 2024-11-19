@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>edit</title>
+  <link th:href="@{/css/pages/edit.css}" rel="stylesheet" />
+</head>
+<body>
+<header class="header">
+  <h1>Edit Tasks</h1>
+</header>
+<main class="main">
+
+  <ul>
+    <li th:each="task : ${tasks}">
+      <span>${task.title}</span>
+      <span>${task.description}</span>
+      <span>${task.status}</span>
+      <span>${task.priority}</span>
+      <span>${task.due_date}</span>
+      <button  th:onclick="${}">delete</button>
+    </li>
+
+  </ul>
+</main>
+</body>
+</html>
