@@ -10,36 +10,36 @@
 </head>
 <body>
 <header class="header">
-    <h1>Edit Task</h1>
+    <h1>Create Task</h1>
 </header>
 <main class="main">
-    <form th:action="@{/tasks/update(id=${task.id})}" th:method="post">
+    <form th:action="@{/tasks/create}" th:method="post">
         <div class="field">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" th:value="${task.title}">
+            <input type="text" name="title" id="title">
         </div>
         <div class="field">
             <label for="description">Description</label>
-            <textarea name="description" id="description" th:text="${task.title}"></textarea>
+            <textarea name="description" id="description"></textarea>
         </div>
         <div class="field">
             <label for="priority">Priority</label>
             <select name="priority" id="priority">
-                <option value="important" th:selected="${task.priority == 'important'}">important</option>
-                <option value="not important" th:selected="${task.priority == 'not important'}">not important</option>
+                <option value="important">important</option>
+                <option value="not important">not important</option>
             </select>
         </div>
         <div class="field">
             <label for="due_date">Deadline</label>
-            <input type="datetime-local" name="due_date" id="due_date" th:value="${formattedDateTime}">
+            <input type="datetime-local" name="due_date" id="due_date">
         </div>
-        <div th:each="category : ${task.categories}" class="field" >
+        <div th:each="category : ${categories}" class="field" >
             <label>
-                <input type="checkbox" th:value="${category.id}" th:name="selectedCategories"  th:checked="${task.categories.contains(category)}"/>
+                <input type="checkbox" th:value="${category.id}" th:name="selectedCategories"/>
                 <span th:text="${category.title}"></span>
             </label>
         </div>
-        <button type="submit">Save Changes</button>
+        <button type="submit">Create Task</button>
     </form>
 </main>
 </body>

@@ -1,0 +1,30 @@
+@import "../reset.css";
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    .field {
+        display: flex;
+        flex-direction: column;
+        width: 50rem;
+        max-width: 100%;
+        align-items: flex-start;
+        justify-content: center;
+    }
+}

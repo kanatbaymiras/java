@@ -1,5 +1,7 @@
 package org.example.lab5.pages;
 
+import org.example.lab5.category.Category;
+import org.example.lab5.category.CategoryService;
 import org.example.lab5.task.Task;
 import org.example.lab5.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,12 @@ import java.util.List;
 @Controller
 public class PagesController {
     private final TaskService taskService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public PagesController(TaskService taskService) {
+    public PagesController(TaskService taskService, CategoryService categoryService) {
         this.taskService = taskService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/login")
@@ -33,5 +37,12 @@ public class PagesController {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
         return "home";
+    }
+
+    @GetMapping("/create")
+    public String create(Model model ) {
+        List<Category> categories = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
+        return "create";
     }
 }

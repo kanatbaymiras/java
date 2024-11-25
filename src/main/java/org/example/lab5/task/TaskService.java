@@ -1,6 +1,9 @@
 package org.example.lab5.task;
 
+import org.example.lab5.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,31 +21,36 @@ public class TaskService {
         this.taskRepository = repository;
     }
 
+
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
 
 
-    //Craete
-    @PostMapping
-    public Task createTask(@RequestBody Task task) {
+    public Task createTask(Task task) {
             return taskRepository.save(task);
     }
 
-    //Update
-    @PostMapping
-    public Task updateTask(@RequestBody Task task) {
+
+
+    public Task updateTask(Task task) {
         if (taskRepository.existsById(task.getId())) {
             return taskRepository.save(task);
         }
         else return null;
     }
 
-    //Delete
-    @DeleteMapping
-    public void deleteTask(@RequestBody Task task) {
-        if (taskRepository.existsById(task.getId())) {
-            taskRepository.deleteById(task.getId());
+    public void deleteTaskById(long id) {
+        if (taskRepository.existsById(id)) {
+            taskRepository.deleteById(id);
         }
+    }
+
+    public Task findTaskById(long id) {
+        return taskRepository.findById(id).orElse(null);
+    }
+
+    public List<Task> getTasksSortedByCategory() {
+        return taskRepository.findTasksSortedByCategory();
     }
 }

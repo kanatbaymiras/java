@@ -15,8 +15,9 @@ header {
     padding: 1.5rem 1rem;
     border-radius: 10px;
     min-width: 35rem;
-    background: #abf;
+    background: #111;
     gap: 1rem;
+    color: #fff;
 
     .form__field {
         display: flex;
