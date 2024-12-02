@@ -29,11 +29,6 @@ public class TaskController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
-    }
-
     @PostMapping
     public Task createTask(Task task) {
         return taskService.createTask(task);
@@ -58,7 +53,7 @@ public class TaskController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime localDateTime = LocalDateTime.parse(due_date, formatter);
 
-        task.setDue_date(localDateTime);
+        task.setDueDate(localDateTime);
 
         task.setCategories(categories);
         taskService.createTask(task);
@@ -67,44 +62,53 @@ public class TaskController {
     }
 
     @PostMapping("/update")
-    public String updateTask(@RequestParam Long id, @RequestParam String title, @RequestParam String description, @RequestParam String priority, @RequestParam String due_date, @RequestParam(name = "selectedCategories") List<Long> selectedCategoriesIDs) {
-        Task task = new Task();
+    public String updateTask(Model model, @RequestParam Long id, @RequestParam String title, @RequestParam String description, @RequestParam String priority, @RequestParam String due_date, @RequestParam(name = "selectedCategories") List<Long> selectedCategoriesIDs) {
+        try {
 
-        task.setId(id);
+            Task task = new Task();
 
-        task.setTitle(title);
-        task.setDescription(description);
-        task.setPriority(priority);
+            task.setId(id);
 
-        List<Category> categories = categoryService.findCategoriesByIds(selectedCategoriesIDs);
+            task.setTitle(title);
+            task.setDescription(description);
+            task.setPriority(priority);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUsername = authentication.getName();
-        User user = userService.findByUsername(currentUsername);
+            List<Category> categories = categoryService.findCategoriesByIds(selectedCategoriesIDs);
 
-        task.setUser(user);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentUsername = authentication.getName();
+            User user = userService.findByUsername(currentUsername);
 
-        task.setCategories(categories);
+            task.setUser(user);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        LocalDateTime localDateTime = LocalDateTime.parse(due_date, formatter);
+            task.setCategories(categories);
 
-        task.setDue_date(localDateTime);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime localDateTime = LocalDateTime.parse(due_date, formatter);
 
-        taskService.updateTask(task);
+            task.setDueDate(localDateTime);
+
+            taskService.updateTask(task);
 
 
-
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "An error occurred while updating the task.");
+            return "error"; // Redirect to your custom error page
+        }
         return "redirect:/home";
+
     }
 
     @GetMapping("/editById")
     public String editById(Model model, @RequestParam Long id) {
         Task task = taskService.findTaskById(id);
+        List<Category> categories = categoryService.getAllCategories();
+
         model.addAttribute("task", task);
+        model.addAttribute("categories", categories);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        String formattedDateTime = task.getDue_date().format(formatter);  // Correct format
+        String formattedDateTime = task.getDueDate().format(formatter);
 
         model.addAttribute("formattedDateTime", formattedDateTime);
         return "edit";

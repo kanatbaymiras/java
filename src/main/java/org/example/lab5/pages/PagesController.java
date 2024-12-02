@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -33,8 +34,13 @@ public class PagesController {
     }
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(Model model, @RequestParam(required = false, defaultValue = "false") boolean sortedByCategoryAsc, @RequestParam(required = false, defaultValue = "false") boolean sortedByCategoryDesc) {
         List<Task> tasks = taskService.getAllTasks();
+        if (sortedByCategoryAsc) {
+            tasks = taskService.getAllTasksSortedByDueDateAsc();
+        } else if (sortedByCategoryDesc) {
+            tasks = taskService.getAllTasksSortedByDueDateDesc();
+        }
         model.addAttribute("tasks", tasks);
         return "home";
     }

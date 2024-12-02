@@ -1,11 +1,10 @@
 package org.example.lab5.task;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import org.example.lab5.category.Category;
 import org.example.lab5.user.User;
 
@@ -27,34 +26,8 @@ public class Task {
     private String status;
     private String priority;
 
-    @PastOrPresent(message = "due_date should not be in the past.")
-    private LocalDateTime due_date;
-
-    @JsonManagedReference
-    @ManyToMany
-    @JoinTable(
-            name = "task_categories",
-            joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private List<Category> categories;
-
-    @PrePersist
-    private void onCreate() {
-        due_date = LocalDateTime.now();
-        status = "in progress";
-    }
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private User user;
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
+    @FutureOrPresent(message = "due_date should not be in the past.")
+    private LocalDateTime dueDate;
 
     public User getUser() {
         return user;
@@ -64,12 +37,20 @@ public class Task {
         this.user = user;
     }
 
-    public LocalDateTime getDue_date() {
-        return due_date;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setDue_date(LocalDateTime due_date) {
-        this.due_date = due_date;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public @FutureOrPresent(message = "due_date should not be in the past.") LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(@FutureOrPresent(message = "due_date should not be in the past.") LocalDateTime dueDate) {
+        this.dueDate = dueDate;
     }
 
     public String getPriority() {
@@ -96,11 +77,11 @@ public class Task {
         this.description = description;
     }
 
-    public String getTitle() {
+    public @Valid @NotNull(message = "Task title cannot be null") String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@Valid @NotNull(message = "Task title cannot be null") String title) {
         this.title = title;
     }
 
@@ -112,8 +93,22 @@ public class Task {
         this.id = id;
     }
 
+    @JsonManagedReference
+    @ManyToMany
+    @JoinTable(
+            name = "task_categories",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categories;
 
+    @PrePersist
+    private void onCreate() {
+        status = "in progress";
+    }
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private User user;
 
 
 }

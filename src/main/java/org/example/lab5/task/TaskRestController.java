@@ -16,9 +16,11 @@ public class TaskRestController {
     }
 
     @GetMapping
-    public List<Task> getAllTasks(@RequestParam(required = false, defaultValue = "false") boolean sortedByCategory) {
-        if (sortedByCategory) {
-            return taskService.getTasksSortedByCategory();
+    public List<Task> getAllTasks(@RequestParam(required = false, defaultValue = "false") boolean sortedByCategoryAsc, @RequestParam(required = false, defaultValue = "false") boolean sortedByCategoryDesc) {
+        if (sortedByCategoryAsc) {
+            return taskService.getAllTasksSortedByDueDateAsc();
+        } else if (sortedByCategoryDesc) {
+            return taskService.getAllTasksSortedByDueDateDesc();
         }
         return taskService.getAllTasks();
     }

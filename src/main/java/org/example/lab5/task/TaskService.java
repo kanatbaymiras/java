@@ -1,13 +1,7 @@
 package org.example.lab5.task;
 
-import org.example.lab5.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -50,7 +44,10 @@ public class TaskService {
         return taskRepository.findById(id).orElse(null);
     }
 
-    public List<Task> getTasksSortedByCategory() {
-        return taskRepository.findTasksSortedByCategory();
+    public List<Task> getAllTasksSortedByDueDateAsc() {
+        return taskRepository.findAllByOrderByDueDateAsc();
+    }
+    public List<Task> getAllTasksSortedByDueDateDesc() {
+        return taskRepository.findAllByOrderByDueDateDesc();
     }
 }

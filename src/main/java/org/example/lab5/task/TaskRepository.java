@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    @Query("SELECT t FROM Task t JOIN t.categories c ORDER BY c.title ASC")
-    List<Task> findTasksSortedByCategory();
+    List<Task> findAllByOrderByDueDateDesc();
+    List<Task> findAllByOrderByDueDateAsc();
 }

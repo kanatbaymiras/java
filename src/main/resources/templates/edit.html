@@ -20,7 +20,7 @@
         </div>
         <div class="field">
             <label for="description">Description</label>
-            <textarea name="description" id="description" th:text="${task.title}"></textarea>
+            <textarea name="description" id="description" th:text="${task.description}"></textarea>
         </div>
         <div class="field">
             <label for="priority">Priority</label>
@@ -33,7 +33,7 @@
             <label for="due_date">Deadline</label>
             <input type="datetime-local" name="due_date" id="due_date" th:value="${formattedDateTime}">
         </div>
-        <div th:each="category : ${task.categories}" class="field" >
+        <div th:each="category : ${categories}" class="field" >
             <label>
                 <input type="checkbox" th:value="${category.id}" th:name="selectedCategories"  th:checked="${task.categories.contains(category)}"/>
                 <span th:text="${category.title}"></span>
