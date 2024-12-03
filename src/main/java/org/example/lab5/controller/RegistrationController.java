@@ -1,6 +1,7 @@
 package org.example.lab5.controller;
 
-import org.example.lab5.DTO.RegistrationDto;
+
+import org.example.lab5.user.User;
 import org.example.lab5.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +20,10 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String password) {
-        RegistrationDto registrationDto = new RegistrationDto(username, password);
-        userService.createUser(registrationDto);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        userService.createUser(user);
         return "redirect:/login";
     }
 }
