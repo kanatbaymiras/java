@@ -1,0 +1,53 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #000;
+  border-radius: 10px;
+  background-color: #fff;
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.5rem;
+  }
+
+  &__title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    padding: 1rem;
+  }
+
+  &__price {
+    padding: 1rem;
+    font-weight: 600;
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  &__button {
+    padding: 1.5rem;
+    cursor: pointer;
+    background-color: none;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    background-color: #222;
+    color: #fff;
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: scale(1.04);
+    }
+  }
+}

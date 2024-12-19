@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Tort",
+    "price": 2000,
+    "description": "This cake was made on the highest mountain of the Kin Kong and made it way through the jungles of Savanna",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Rührkuchen",
+    "price": 1500,
+    "description": "This cake was made from biscuits of Arsen, the greatest aboba",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Cloudberry Delight",
+    "price": 3000,
+    "description": "Crafted from the mythical cloudberries harvested atop the Misty Peaks during the golden sunrise.",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Velvet Eclipse",
+    "price": 4500,
+    "description": "A luxurious chocolate velvet cake, infused with stardust from the dark side of the Moon, perfect for dreamers.",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Amber Honeycake",
+    "price": 1500,
+    "description": "A soft, fluffy cake drizzled with honey collected by golden bees from the secret valleys of Eldoria.",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Ocean Wave Tart",
+    "price": 2200,
+    "description": "Infused with the essence of ocean breeze, this tart contains pearls of flavor harvested from the sapphire waters of Atlantida.",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Crystal Berry Cake",
+    "price": 2800,
+    "description": "Glistening with crystalized wild berries found deep in the Frostwood forest under the glow of the Northern Lights.",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Dragonfruit Blaze",
+    "price": 3200,
+    "description": "Baked over the roaring flames of a dragon's breath, this cake bursts with the exotic taste of fiery dragonfruit.",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Sunset Cheesecake",
+    "price": 1900,
+    "description": "A creamy cheesecake layered with hues of mango and passionfruit, as vibrant as the sunsets of the Amaranth Coast.",
+    "quantityInOrder": 0
+  },
+  {
+    "name": "Mystic Lavender Loaf",
+    "price": 2500,
+    "description": "Infused with lavender petals plucked by moonlight, this loaf carries the calm whispers of the Enchanted Meadows.",
+    "quantityInOrder": 0
+  }
+]
